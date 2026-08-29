@@ -71,7 +71,7 @@ if __name__ == '__main__':
     result = simpleArraySum(ar)
     print(result)
 ''',
-        "explanation": '''# Simple Array Sum
+        "explanation": r'''# Simple Array Sum
 
 ## Problem Summary
 Given an array of integers, find the sum of its elements.
@@ -84,7 +84,7 @@ Given an array of integers, find the sum of its elements.
 - **Time Complexity:** $\mathcal{O}(N)$ where $N$ is the number of elements in the array.
 - **Space Complexity:** $\mathcal{O}(1)$ constant extra space.
 ''',
-        "cheat_sheet": '''# Cheat Sheet: Simple Array Sum
+        "cheat_sheet": r'''# Cheat Sheet: Simple Array Sum
 
 - **Key Takeaway:** Summing elements of an array/list in Python.
 - **Complexity:** $\mathcal{O}(N)$ Time | $\mathcal{O}(1)$ Space.
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     result = compareTriplets(a, b)
     print(' '.join(map(str, result)))
 ''',
-        "explanation": '''# Compare the Triplets
+        "explanation": r'''# Compare the Triplets
 
 ## Problem Summary
 Compare rating triplets of Alice and Bob and count points earned by each.
@@ -126,7 +126,7 @@ Compare rating triplets of Alice and Bob and count points earned by each.
 - **Time Complexity:** $\mathcal{O}(1)$ — Fixed 3 iterations.
 - **Space Complexity:** $\mathcal{O}(1)$ — Constant space.
 ''',
-        "cheat_sheet": '''# Cheat Sheet: Compare the Triplets
+        "cheat_sheet": r'''# Cheat Sheet: Compare the Triplets
 
 - **Key Takeaway:** Parallel list iteration and comparison logic.
 - **Complexity:** $\mathcal{O}(1)$ Time | $\mathcal{O}(1)$ Space.
@@ -157,13 +157,13 @@ Solve problem `{slug}`.
 - Optimal solution for {name}.
 
 ## Complexity Analysis
-- **Time Complexity:** $\mathcal{O}(N)$
-- **Space Complexity:** $\mathcal{O}(1)$
+- **Time Complexity:** $\\mathcal{{O}}(N)$
+- **Space Complexity:** $\\mathcal{{O}}(1)$
 '''
     cs = f'''# Cheat Sheet: {name}
 
 - **Key Concept:** Solution pattern for {name}.
-- **Complexity:** $\mathcal{O}(N)$ Time | $\mathcal{O}(1)$ Space.
+- **Complexity:** $\\mathcal{{O}}(N)$ Time | $\\mathcal{{O}}(1)$ Space.
 '''
     return {"solution": sol, "explanation": exp, "cheat_sheet": cs}
 
