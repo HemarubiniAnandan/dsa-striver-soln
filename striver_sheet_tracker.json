@@ -1,8 +1,8 @@
 {
-  "last_completed_index": 0,
-  "completed_problems": [],
+  "last_completed_index": 1,
+  "completed_problems": [1],
   "problems": [
-    {"id":1,"topic":"01_Warmup","name":"Solve Me First","slug":"solve-me-first","url":"https://www.hackerrank.com/challenges/solve-me-first/problem","difficulty":"Easy","status":"pending"},
+    {"id":1,"topic":"01_Warmup","name":"Solve Me First","slug":"solve-me-first","url":"https://www.hackerrank.com/challenges/solve-me-first/problem","difficulty":"Easy","status":"completed"},
     {"id":2,"topic":"01_Warmup","name":"Simple Array Sum","slug":"simple-array-sum","url":"https://www.hackerrank.com/challenges/simple-array-sum/problem","difficulty":"Easy","status":"pending"},
     {"id":3,"topic":"01_Warmup","name":"Compare the Triplets","slug":"compare-the-triplets","url":"https://www.hackerrank.com/challenges/compare-the-triplets/problem","difficulty":"Easy","status":"pending"},
     {"id":4,"topic":"01_Warmup","name":"A Very Big Sum","slug":"a-very-big-sum","url":"https://www.hackerrank.com/challenges/a-very-big-sum/problem","difficulty":"Easy","status":"pending"},
