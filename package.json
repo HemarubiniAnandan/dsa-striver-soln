@@ -1,0 +1,22 @@
+{
+  "name": "dsa-striver-soln",
+  "version": "1.0.0",
+  "description": "Automated GeeksforGeeks Striver DSA Problem Solver",
+  "main": "solve.py",
+  "scripts": {
+    "start": "python solve.py",
+    "solve": "python solve.py --solve",
+    "login": "python solve.py --login",
+    "status": "python solve.py --status",
+    "all": "python solve.py --all"
+  },
+  "keywords": [
+    "dsa",
+    "striver",
+    "geeksforgeeks",
+    "python",
+    "automation"
+  ],
+  "author": "Hemarubini Anandan",
+  "license": "MIT"
+}
