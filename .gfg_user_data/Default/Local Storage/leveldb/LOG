@@ -1,5 +1,5 @@
-2026/08/30-19:43:59.831 3724 Reusing MANIFEST D:\hackereank x git\.gfg_user_data\Default\Local Storage\leveldb/MANIFEST-000001
-2026/08/30-19:43:59.840 3724 Recovering log #7
-2026/08/30-19:43:59.840 3724 Level-0 table #9: started
-2026/08/30-19:43:59.847 3724 Level-0 table #9: 12274 bytes OK
-2026/08/30-19:43:59.853 3724 Delete type=0 #7
+2026/08/30-19:44:51.977 183c Reusing MANIFEST D:\hackereank x git\.gfg_user_data\Default\Local Storage\leveldb/MANIFEST-000001
+2026/08/30-19:44:51.987 183c Recovering log #10
+2026/08/30-19:44:51.989 183c Reusing old log D:\hackereank x git\.gfg_user_data\Default\Local Storage\leveldb/000010.log 
+2026/08/30-19:45:23.823 183c Level-0 table #13: started
+2026/08/30-19:45:23.835 183c Level-0 table #13: 12298 bytes OK

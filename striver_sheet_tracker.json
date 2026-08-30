@@ -1,10 +1,11 @@
 {
-  "last_completed_index": 4,
+  "last_completed_index": 5,
   "completed_problems": [
     1,
     2,
     3,
-    4
+    4,
+    5
   ],
   "problems": [
     {
@@ -50,7 +51,7 @@
       "slug": "armstrong-numbers2727",
       "url": "https://www.geeksforgeeks.org/problems/armstrong-numbers2727/1",
       "difficulty": "Easy",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 6,
