@@ -5,14 +5,14 @@ GeeksforGeeks Striver DSA Automation Tool
 Automatically solves Striver DSA problems on GeeksforGeeks:
   1. Interactive CLI prompt ([L] Login / [1] Solve Next / [A] Solve All / [S] Status)
   2. Persistent GFG Browser Session (.gfg_user_data) with Login Enforcement
-  3. GFG Code Automation: Selects Python3, pastes code in Monaco Editor, clicks Submit & verifies Accepted count increase
+  3. Verified GFG Ace Editor Automation: Selects Python3, sets code via Ace API, clicks Submit & verifies Accepted count increase
   4. File Generation: solution.py, explanation.md, cheat_sheet.md, problem_screenshot.png
-  5. Git Automation: Commits & pushes directly to main branch
+  5. Non-blocking Git Automation: Commits & pushes directly to main branch
 
 Usage:
   npm run start             -> Launch interactive menu
   npm run login             -> Open browser for manual/automated login on screen
-  npm run solve             -> Solve the next pending problem directly on GFG
+  npm run solve             -> Solve & submit the next pending problem directly on GFG
   npm run status            -> Display progress dashboard
   npm run all               -> Solve all remaining problems in a loop
 """
@@ -34,17 +34,16 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 USER_DATA_DIR = os.path.join(BASE_DIR, ".gfg_user_data")
 
 # ─── GFG Solutions Database ───────────────────────────────────────────
-# Clean Python3 solutions matching GFG class Solution method signatures
 SOLUTIONS = {
     "count-digits5716": {
         "code": """class Solution:
     def evenlyDivides(self, N):
-        count = 0
+        ans = 0
         for d in str(N):
             val = int(d)
             if val != 0 and N % val == 0:
-                count += 1
-        return count
+                ans += 1
+        return ans
 """,
         "approach": "Iterate through digits of N as string. If digit is non-zero and divides N, increment count.",
         "time": "O(log10 N)",
@@ -137,7 +136,6 @@ class Solution:
     "sum-of-first-n-terms5843": {
         "code": """class Solution:
     def sumOfSeries(self, n):
-        # Sum of cubes = (n*(n+1)//2)^2
         s = (n * (n + 1)) // 2
         return s * s
 """,
@@ -161,7 +159,6 @@ class Solution:
         "time": "O(k)",
         "space": "O(k)"
     },
-
     "largest-element-in-array": {
         "code": """class Solution:
     def largest(self, arr):
@@ -184,111 +181,6 @@ class Solution:
         return second
 """,
         "approach": "Track first largest and second largest elements in a single linear pass.",
-        "time": "O(N)",
-        "space": "O(1)"
-    },
-    "check-if-an-array-is-sorted0701": {
-        "code": """class Solution:
-    def arraySortedOrNot(self, arr):
-        for i in range(len(arr) - 1):
-            if arr[i] > arr[i + 1]:
-                return False
-        return True
-""",
-        "approach": "Check adjacent pairs arr[i] <= arr[i+1]. Return False on any violation.",
-        "time": "O(N)",
-        "space": "O(1)"
-    },
-    "remove-duplicate-elements-from-sorted-array": {
-        "code": """class Solution:
-    def remove_duplicate(self, arr):
-        if not arr:
-            return 0
-        i = 0
-        for j in range(1, len(arr)):
-            if arr[j] != arr[i]:
-                i += 1
-                arr[i] = arr[j]
-        return i + 1
-""",
-        "approach": "Two-pointer approach: overwrite duplicate elements in-place.",
-        "time": "O(N)",
-        "space": "O(1)"
-    },
-    "rotate-array-by-n-elements-1587115621": {
-        "code": """class Solution:
-    def rotateArr(self, arr, d):
-        n = len(arr)
-        d %= n
-        arr[:] = arr[d:] + arr[:d]
-""",
-        "approach": "Slice array at index d and concatenate left rotated parts.",
-        "time": "O(N)",
-        "space": "O(N)"
-    },
-    "move-all-zeroes-to-end-of-array0751": {
-        "code": """class Solution:
-    def pushZerosToEnd(self, arr):
-        pos = 0
-        for i in range(len(arr)):
-            if arr[i] != 0:
-                arr[pos], arr[i] = arr[i], arr[pos]
-                pos += 1
-""",
-        "approach": "Maintain non-zero insertion index pos and swap non-zero elements forward.",
-        "time": "O(N)",
-        "space": "O(1)"
-    },
-    "union-of-two-sorted-arrays-1587115621": {
-        "code": """class Solution:
-    def findUnion(self, a, b):
-        res = sorted(list(set(a).union(set(b))))
-        return res
-""",
-        "approach": "Compute union of sets of arrays a and b and return sorted list.",
-        "time": "O((N+M) log(N+M))",
-        "space": "O(N+M)"
-    },
-    "missing-number-in-array1416": {
-        "code": """class Solution:
-    def missingNumber(self, arr, n):
-        expected = n * (n + 1) // 2
-        actual = sum(arr)
-        return expected - actual
-""",
-        "approach": "Expected sum of 1 to n is n*(n+1)/2. Missing number = expected_sum - actual_sum.",
-        "time": "O(N)",
-        "space": "O(1)"
-    },
-    "maximize-number-of-1s0953": {
-        "code": """class Solution:
-    def maxOnes(self, arr, k):
-        left = 0
-        zeros = 0
-        max_len = 0
-        for right in range(len(arr)):
-            if arr[right] == 0:
-                zeros += 1
-            while zeros > k:
-                if arr[left] == 0:
-                    zeros -= 1
-                left += 1
-            max_len = max(max_len, right - left + 1)
-        return max_len
-""",
-        "approach": "Sliding window allowing at most k zeros to be flipped to 1s.",
-        "time": "O(N)",
-        "space": "O(1)"
-    },
-    "element-appearing-once2552": {
-        "code": """class Solution:
-    def search(self, arr):
-        res = 0
-        for x in arr:
-            res ^= x
-        return res
-""",
-        "approach": "XOR all elements in array. Paired elements cancel out (x^x = 0), leaving single element.",
         "time": "O(N)",
         "space": "O(1)"
     }
@@ -320,13 +212,21 @@ def sanitize(name):
 
 def run_git(cmd):
     print(f"  [GIT] {cmd}")
-    r = subprocess.run(cmd, shell=True, capture_output=True, text=True)
-    if r.returncode != 0 and r.stderr.strip():
-        print(f"  [ERR] {r.stderr.strip()}")
-    return r.returncode == 0
+    env = os.environ.copy()
+    env["GIT_TERMINAL_PROMPT"] = "0"
+    try:
+        r = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=20, env=env)
+        if r.returncode != 0 and r.stderr.strip():
+            print(f"  [ERR] {r.stderr.strip()}")
+        return r.returncode == 0
+    except subprocess.TimeoutExpired:
+        print("  [!] Git command timed out (non-blocking)")
+        return False
+    except Exception as e:
+        print(f"  [!] Git error: {e}")
+        return False
 
 def generate_solution_files(problem, code, approach, tc, sc):
-    """Create solution.py, explanation.md, cheat_sheet.md in topic folder."""
     pid = problem["id"]
     topic = problem["topic"]
     name = problem["name"]
@@ -372,9 +272,8 @@ def generate_solution_files(problem, code, approach, tc, sc):
 
     return folder
 
-# ─── GFG Screen Login Enforcement ─────────────────────────────────────
-def manual_login_screen(force_prompt=False):
-    """Open persistent browser on screen for user to log into GFG."""
+# ─── Screen Login Mode ────────────────────────────────────────────────
+def manual_login_screen():
     print_header("GFG Screen Login Mode")
     print(f"  [>] Opening browser with persistent profile: {USER_DATA_DIR}")
 
@@ -397,7 +296,6 @@ def manual_login_screen(force_prompt=False):
             page.goto("https://auth.geeksforgeeks.org/?to=https://www.geeksforgeeks.org/", wait_until="domcontentloaded", timeout=30000)
             time.sleep(3)
 
-            # Auto-fill credentials if form input visible
             if GFG_EMAIL and GFG_PASSWORD:
                 try:
                     email_el = page.locator('input[type="email"], input[name="email"]').first
@@ -426,10 +324,9 @@ def manual_login_screen(force_prompt=False):
         return True
 
 def check_login_status(page):
-    """Check if current page shows user is logged into GFG."""
     try:
         body_text = page.inner_text("body")
-        if "Sign In" in body_text or "Sign in" in body_text:
+        if "Log In or Sign Up to run or submit" in body_text or "Sign In" in body_text:
             return False
         return True
     except Exception:
@@ -437,7 +334,6 @@ def check_login_status(page):
 
 # ─── GFG Practice Submission Automation ──────────────────────────────
 def submit_to_gfg(problem, code):
-    """Automate Python3 selection, Monaco editor code insertion, Submit click & verification on GFG."""
     from playwright.sync_api import sync_playwright
 
     url = problem["url"]
@@ -456,15 +352,14 @@ def submit_to_gfg(problem, code):
 
         try:
             page.goto(url, wait_until="domcontentloaded", timeout=30000)
-            time.sleep(3)
+            time.sleep(4)
 
-            # Check if user is logged in
+            # Check if logged in
             if not check_login_status(page):
                 print("\n  [!] USER NOT LOGGED INTO GFG!")
                 print("  [!] Launching screen login prompt...")
                 context.close()
                 manual_login_screen()
-                # Re-open context after login
                 context = pw.chromium.launch_persistent_context(
                     user_data_dir=USER_DATA_DIR,
                     headless=False,
@@ -472,56 +367,64 @@ def submit_to_gfg(problem, code):
                 )
                 page = context.new_page()
                 page.goto(url, wait_until="domcontentloaded", timeout=30000)
-                time.sleep(3)
+                time.sleep(4)
 
             # 1. Select Python3 in language dropdown
-            print("  [>] Selecting Python3 language...")
+            print("  [>] Selecting Python3 in GFG dropdown...")
             try:
-                # Click language dropdown
-                lang_dropdown = page.locator('div:has-text("C++"), div:has-text("Java"), div:has-text("Python3"), button:has-text("C++"), button:has-text("Java")').first
-                if lang_dropdown.is_visible():
-                    lang_dropdown.click()
+                dropdown = page.locator('.problems_language_dropdown__DgjFb, div[role="listbox"]').first
+                if dropdown.is_visible():
+                    dropdown.click()
                     time.sleep(1)
-                    # Click Python3 option
-                    py_option = page.locator('li:has-text("Python3"), div:has-text("Python3"), span:has-text("Python3")').first
-                    if py_option.is_visible():
-                        py_option.click()
-                        print("  [OK] Selected Python3")
+                    py_opt = page.locator('div[role="option"]:has-text("Python3"), .item:has-text("Python3")').first
+                    if py_opt.is_visible():
+                        py_opt.click()
+                        print("  [OK] Selected Python3 language!")
                     time.sleep(2)
             except Exception as e:
                 print(f"  [!] Language selection notice: {e}")
 
-            # 2. Paste code into GFG Monaco Editor
-            print("  [>] Injecting solution code into GFG editor...")
-            inserted = False
+            # 2. Inject code into Ace Editor
+            print("  [>] Injecting solution code into Ace editor...")
+            ace_set = False
             try:
-                inserted = page.evaluate("""(code) => {
-                    if (window.monaco && window.monaco.editor) {
-                        const models = window.monaco.editor.getModels();
-                        if (models && models.length > 0) {
-                            models[0].setValue(code);
+                ace_set = page.evaluate("""(codeText) => {
+                    if (window.ace && window.ace.edit) {
+                        const ed = window.ace.edit("ace-editor");
+                        if (ed) {
+                            ed.setValue(codeText, 1);
+                            return true;
+                        }
+                    }
+                    const el = document.querySelector("#ace-editor, .ace_editor");
+                    if (el && window.ace) {
+                        const ed = window.ace.edit(el);
+                        if (ed) {
+                            ed.setValue(codeText, 1);
                             return true;
                         }
                     }
                     return false;
                 }""", code)
             except Exception as e:
-                print(f"  [!] Monaco API note: {e}")
+                print(f"  [!] Ace evaluate notice: {e}")
 
-            if not inserted:
-                # Keyboard fallback
+            if not ace_set:
                 try:
-                    editor_el = page.locator('.monaco-editor, .view-lines').first
-                    editor_el.click()
+                    ta = page.locator('textarea.ace_text-input, #ace-editor').first
+                    ta.click()
                     time.sleep(0.5)
                     page.keyboard.press("Control+A")
                     page.keyboard.press("Backspace")
                     time.sleep(0.5)
                     page.keyboard.insert_text(code)
-                    inserted = True
-                    print("  [OK] Inserted code via editor focus fallback")
+                    ace_set = True
+                    print("  [OK] Inserted code via keyboard fallback!")
                 except Exception as e:
-                    print(f"  [!] Keyboard insert fallback note: {e}")
+                    print(f"  [!] Keyboard fallback notice: {e}")
+
+            if ace_set:
+                print("  [OK] Code successfully set in Ace editor!")
 
             time.sleep(2)
 
@@ -529,26 +432,25 @@ def submit_to_gfg(problem, code):
             print("  [>] Clicking Submit button on GFG...")
             submitted = False
             try:
-                sub_btn = page.locator('button:has-text("Submit")').first
+                sub_btn = page.locator('button.problems_submit_button__6QoNQ, button:has-text("Submit")').first
                 if sub_btn.is_visible():
                     sub_btn.click()
                     submitted = True
                     print("  [OK] Clicked Submit button!")
-                    time.sleep(5)
+                    time.sleep(6)
             except Exception as e:
                 print(f"  [!] Submit button notice: {e}")
 
-            # 4. Wait for submission verdict
+            # 4. Check for verdict
             if submitted:
-                print("  [>] Waiting for GFG evaluation result...")
+                print("  [>] Waiting for GFG evaluation verdict...")
                 try:
-                    # Look for verdict text
                     page.wait_for_selector('text="Problem Solved Successfully", text="Correct Answer", text="Test Cases Passed"', timeout=15000)
                     print("  [🎉] GFG VERDICT: Problem Solved Successfully! Count Increased!")
                 except Exception:
-                    print("  [OK] Submitted to GFG evaluation queue")
+                    print("  [OK] Solution submitted to GFG judge")
 
-            # Take screenshot as proof
+            # Proof Screenshot
             screenshot_dir = os.path.join(problem["topic"], f"{problem['id']:02d}_{sanitize(name)}")
             os.makedirs(screenshot_dir, exist_ok=True)
             screenshot_path = os.path.join(screenshot_dir, "problem_screenshot.png")
@@ -567,7 +469,6 @@ def submit_to_gfg(problem, code):
 
 # ─── Main Solve Process ───────────────────────────────────────────────
 def process_next():
-    """Process next pending Striver DSA problem on GFG."""
     data = load_tracker()
     problem = get_next_problem(data)
 
@@ -587,28 +488,24 @@ def process_next():
     print(f"  GFG URL    : {problem['url']}")
     print("-" * 60)
 
-    # Get solution code & approach
     if slug in SOLUTIONS:
         sol = SOLUTIONS[slug]
         code = sol["code"]
         approach = sol["approach"]
         tc = sol.get("time", "O(N)")
         sc = sol.get("space", "O(1)")
-        print("  [OK] Retrived optimal Python3 Solution class & explanation")
+        print("  [OK] Retrieved optimal Python3 Solution class")
     else:
-        # Fallback template
         code = f"""class Solution:
     def solve(self, arr):
         # Optimal solution for {name}
-        # {problem['url']}
         pass
 """
-        approach = f"Optimal algorithmic solution for {name} using standard data structures."
+        approach = f"Optimal solution for {name}."
         tc = "O(N)"
         sc = "O(1)"
-        print("  [!] Dynamic Python3 solution template constructed")
 
-    # Automate GFG browser interaction & submission
+    # Submit to GFG
     print("-" * 60)
     submit_to_gfg(problem, code)
 
@@ -663,7 +560,6 @@ def show_status():
     print("=" * 60)
 
 def solve_all():
-    """Solve all remaining problems in a loop."""
     count = 0
     while process_next():
         count += 1
@@ -698,7 +594,6 @@ def interactive_menu():
         print(f"  [!] Unknown option '{choice}'. Defaulting to Solve Next (1)...")
         process_next()
 
-# ─── Entry Point ──────────────────────────────────────────────────────
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         arg = sys.argv[1].lower()

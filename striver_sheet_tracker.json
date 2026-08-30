@@ -1,7 +1,8 @@
 {
-  "last_completed_index": 1,
+  "last_completed_index": 2,
   "completed_problems": [
-    1
+    1,
+    2
   ],
   "problems": [
     {
@@ -20,7 +21,7 @@
       "slug": "reverse-bits1615",
       "url": "https://www.geeksforgeeks.org/problems/reverse-bits1615/1",
       "difficulty": "Easy",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 3,
