@@ -1,2 +1,3 @@
-2026/08/30-18:47:44.611 6e4c Creating DB D:\hackereank x git\.gfg_user_data\Default\shared_proto_db\metadata since it was missing.
-2026/08/30-18:47:44.621 6e4c Reusing MANIFEST D:\hackereank x git\.gfg_user_data\Default\shared_proto_db\metadata/MANIFEST-000001
+2026/08/30-18:50:44.903 bcc Reusing MANIFEST D:\hackereank x git\.gfg_user_data\Default\shared_proto_db\metadata/MANIFEST-000001
+2026/08/30-18:50:44.904 bcc Recovering log #3
+2026/08/30-18:50:44.905 bcc Reusing old log D:\hackereank x git\.gfg_user_data\Default\shared_proto_db\metadata/000003.log 
