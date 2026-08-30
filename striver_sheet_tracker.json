@@ -1,9 +1,10 @@
 {
-  "last_completed_index": 3,
+  "last_completed_index": 4,
   "completed_problems": [
     1,
     2,
-    3
+    3,
+    4
   ],
   "problems": [
     {
@@ -40,7 +41,7 @@
       "slug": "lcm-and-gcd4516",
       "url": "https://www.geeksforgeeks.org/problems/lcm-and-gcd4516/1",
       "difficulty": "Easy",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 5,
