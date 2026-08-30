@@ -1,12 +1,13 @@
 {
-  "last_completed_index": 6,
+  "last_completed_index": 7,
   "completed_problems": [
     1,
     2,
     3,
     4,
     5,
-    6
+    6,
+    7
   ],
   "problems": [
     {
@@ -70,7 +71,7 @@
       "slug": "staircase",
       "url": "https://www.geeksforgeeks.org/problems/staircase/1",
       "difficulty": "Easy",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 8,
