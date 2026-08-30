@@ -37,28 +37,29 @@ USER_DATA_DIR = os.path.join(BASE_DIR, ".gfg_user_data")
 SOLUTIONS = {
     "count-digits5716": {
         "code": '''class Solution:
-    def evenlyDivides(self, N):
+    def divisibleByDigits(self, s):
+        n = int(s)
         ans = 0
-        for d in str(N):
+        for d in s:
             val = int(d)
-            if val != 0 and N % val == 0:
+            if val != 0 and n % val == 0:
                 ans += 1
         return ans
 ''',
-        "approach": "Iterate through digits of N as string. If digit is non-zero and divides N, increment count.",
-        "time": "O(log10 N)",
+        "approach": "Iterate through digits of s. Count non-zero digits that divide integer n.",
+        "time": "O(|s|)",
         "space": "O(1)"
     },
     "reverse-bits1615": {
         "code": '''class Solution:
-    def reversedBits(self, X):
+    def reversedBits(self, x):
         res = 0
         for i in range(32):
-            res = (res << 1) | (X & 1)
-            X >>= 1
+            res = (res << 1) | (x & 1)
+            x >>= 1
         return res
 ''',
-        "approach": "Extract LSB of X and push into result res using bit shifts across 32 iterations.",
+        "approach": "Extract LSB of x and push into res using bit shifts over 32 iterations.",
         "time": "O(1)",
         "space": "O(1)"
     },
@@ -67,7 +68,7 @@ SOLUTIONS = {
     def isPalindrome(self, S):
         return 1 if S == S[::-1] else 0
 ''',
-        "approach": "Compare string S with its reverse S[::-1]. Return 1 if equal, 0 otherwise.",
+        "approach": "Check if string S equals its reverse S[::-1]. Return 1 for true, 0 for false.",
         "time": "O(|S|)",
         "space": "O(1)"
     },
@@ -80,7 +81,7 @@ class Solution:
         l = (A * B) // g
         return [l, g]
 ''',
-        "approach": "Use Euclidean algorithm via math.gcd to find GCD. LCM = (A * B) // GCD.",
+        "approach": "Compute GCD using Euclidean algorithm via math.gcd. LCM = (A * B) // GCD.",
         "time": "O(log(min(A, B)))",
         "space": "O(1)"
     },
@@ -92,45 +93,45 @@ class Solution:
         total = sum(int(d)**k for d in s)
         return "Yes" if total == n else "No"
 ''',
-        "approach": "Sum each digit raised to the power of total number of digits. Compare with original n.",
-        "time": "O(log10 N)",
+        "approach": "Sum each digit raised to power of total number of digits. Compare with n.",
+        "time": "O(log10 n)",
         "space": "O(1)"
     },
     "sum-of-all-divisors-from-1-to-n4738": {
         "code": '''class Solution:
-    def sumOfDivisors(self, N):
+    def sumOfDivisors(self, n):
         ans = 0
-        for i in range(1, N + 1):
-            ans += i * (N // i)
+        for i in range(1, n + 1):
+            ans += i * (n // i)
         return ans
 ''',
-        "approach": "Each integer i between 1 and N appears as a divisor (N // i) times across all numbers from 1 to N.",
-        "time": "O(N)",
+        "approach": "Each divisor i contributes i * (n // i) to the total sum.",
+        "time": "O(n)",
         "space": "O(1)"
     },
     "print-1-to-n-without-loop-1587115620": {
         "code": '''class Solution:
-    def printNos(self, N):
-        if N <= 0:
+    def printNos(self, n):
+        if n <= 0:
             return
-        self.printNos(N - 1)
-        print(N, end=" ")
+        self.printNos(n - 1)
+        print(n, end=" ")
 ''',
-        "approach": "Use recursion to print 1 to N without using any for/while loops.",
-        "time": "O(N)",
-        "space": "O(N)"
+        "approach": "Recursively print numbers from 1 to n.",
+        "time": "O(n)",
+        "space": "O(n)"
     },
     "print-n-to-1-without-loop-1587115620": {
         "code": '''class Solution:
-    def printNos(self, N):
-        if N <= 0:
+    def printNos(self, n):
+        if n <= 0:
             return
-        print(N, end=" ")
-        self.printNos(N - 1)
+        print(n, end=" ")
+        self.printNos(n - 1)
 ''',
-        "approach": "Use tail recursion: print current N and recurse for N-1.",
-        "time": "O(N)",
-        "space": "O(N)"
+        "approach": "Recursively print numbers from n down to 1.",
+        "time": "O(n)",
+        "space": "O(n)"
     },
     "sum-of-first-n-terms5843": {
         "code": '''class Solution:
@@ -138,7 +139,7 @@ class Solution:
         s = (n * (n + 1)) // 2
         return s * s
 ''',
-        "approach": "Mathematical formula for sum of first n cubes: (n*(n+1)/2)^2.",
+        "approach": "Formula for sum of first n cubes: (n*(n+1)/2)^2.",
         "time": "O(1)",
         "space": "O(1)"
     },
@@ -154,7 +155,7 @@ class Solution:
             fact *= i
         return res
 ''',
-        "approach": "Iteratively generate factorials starting from 1! until factorial > n.",
+        "approach": "Generate factorials starting from 1! until factorial > n.",
         "time": "O(k)",
         "space": "O(k)"
     },
@@ -163,13 +164,13 @@ class Solution:
     def largest(self, arr):
         return max(arr)
 ''',
-        "approach": "Iterate through array to track maximum element using built-in max().",
+        "approach": "Return maximum element in array.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "second-largest3735": {
         "code": '''class Solution:
-    def print2largest(self, arr):
+    def getSecondLargest(self, arr):
         first = second = -1
         for x in arr:
             if x > first:
@@ -179,25 +180,25 @@ class Solution:
                 second = x
         return second
 ''',
-        "approach": "Track first largest and second largest elements in a single linear pass.",
+        "approach": "Single pass to track largest and second largest elements.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "check-if-an-array-is-sorted0701": {
         "code": '''class Solution:
-    def arraySortedOrNot(self, arr):
+    def isSorted(self, arr):
         for i in range(len(arr) - 1):
             if arr[i] > arr[i + 1]:
                 return False
         return True
 ''',
-        "approach": "Check adjacent pairs arr[i] <= arr[i+1]. Return False on any violation.",
+        "approach": "Check if every element arr[i] <= arr[i+1].",
         "time": "O(N)",
         "space": "O(1)"
     },
     "remove-duplicate-elements-from-sorted-array": {
         "code": '''class Solution:
-    def remove_duplicate(self, arr):
+    def removeDuplicates(self, arr):
         if not arr:
             return 0
         i = 0
@@ -207,7 +208,7 @@ class Solution:
                 arr[i] = arr[j]
         return i + 1
 ''',
-        "approach": "Two-pointer approach: overwrite duplicate elements in-place.",
+        "approach": "Two pointer in-place duplicate removal.",
         "time": "O(N)",
         "space": "O(1)"
     },
@@ -218,7 +219,7 @@ class Solution:
         d %= n
         arr[:] = arr[d:] + arr[:d]
 ''',
-        "approach": "Slice array at index d and concatenate left rotated parts.",
+        "approach": "Rotate array left by d positions using array slicing.",
         "time": "O(N)",
         "space": "O(N)"
     },
@@ -231,7 +232,7 @@ class Solution:
                 arr[pos], arr[i] = arr[i], arr[pos]
                 pos += 1
 ''',
-        "approach": "Maintain non-zero insertion index pos and swap non-zero elements forward.",
+        "approach": "Swap non-zero elements to front position pos.",
         "time": "O(N)",
         "space": "O(1)"
     },
@@ -240,18 +241,19 @@ class Solution:
     def findUnion(self, a, b):
         return sorted(list(set(a).union(set(b))))
 ''',
-        "approach": "Compute union of sets of arrays a and b and return sorted list.",
+        "approach": "Combine set representation of arrays a and b and return sorted list.",
         "time": "O((N+M) log(N+M))",
         "space": "O(N+M)"
     },
     "missing-number-in-array1416": {
         "code": '''class Solution:
-    def missingNumber(self, arr, n):
+    def missingNum(self, arr):
+        n = len(arr) + 1
         expected = n * (n + 1) // 2
         actual = sum(arr)
         return expected - actual
 ''',
-        "approach": "Expected sum of 1 to n is n*(n+1)/2. Missing number = expected_sum - actual_sum.",
+        "approach": "Calculate expected sum for 1 to n and subtract actual sum.",
         "time": "O(N)",
         "space": "O(1)"
     },
@@ -271,25 +273,25 @@ class Solution:
             max_len = max(max_len, right - left + 1)
         return max_len
 ''',
-        "approach": "Sliding window allowing at most k zeros to be flipped to 1s.",
+        "approach": "Sliding window allowing at most k zero flips.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "element-appearing-once2552": {
         "code": '''class Solution:
-    def search(self, arr):
+    def findUnique(self, arr):
         res = 0
         for x in arr:
             res ^= x
         return res
 ''',
-        "approach": "XOR all elements in array. Paired elements cancel out, leaving single element.",
+        "approach": "XOR all elements to isolate single non-repeating element.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "longest-sub-array-with-sum-k0809": {
         "code": '''class Solution:
-    def lenOfLongSubarr(self, arr, k):
+    def longestSubarray(self, arr, k):
         mp = {}
         s = 0
         max_len = 0
@@ -303,28 +305,28 @@ class Solution:
                 mp[s] = i
         return max_len
 ''',
-        "approach": "Prefix sum hash map to find longest subarray with sum K.",
+        "approach": "Prefix sum hash map to store first occurrence of prefix sums.",
         "time": "O(N)",
         "space": "O(N)"
     },
     "key-pair": {
         "code": '''class Solution:
-    def hasArrayTwoCandidates(self, arr, n, x):
+    def twoSum(self, arr, target):
         seen = set()
         for val in arr:
-            if (x - val) in seen:
+            if (target - val) in seen:
                 return True
             seen.add(val)
         return False
 ''',
-        "approach": "Use hash set to check if complementary target (x - val) exists.",
+        "approach": "Hash set check for pair summing to target.",
         "time": "O(N)",
         "space": "O(N)"
     },
     "sort-an-array-of-0s-1s-and-2s4231": {
         "code": '''class Solution:
-    def sort012(self, arr, n):
-        low, mid, high = 0, 0, n - 1
+    def sort012(self, arr):
+        low, mid, high = 0, 0, len(arr) - 1
         while mid <= high:
             if arr[mid] == 0:
                 arr[low], arr[mid] = arr[mid], arr[low]
@@ -336,30 +338,30 @@ class Solution:
                 arr[mid], arr[high] = arr[high], arr[mid]
                 high -= 1
 ''',
-        "approach": "Dutch National Flag algorithm using low, mid, high pointers.",
+        "approach": "Dutch National Flag algorithm.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "majority-element-1587115620": {
         "code": '''class Solution:
-    def majorityElement(self, A, N):
+    def majorityElement(self, arr):
         cand, count = None, 0
-        for x in A:
+        for x in arr:
             if count == 0:
                 cand, count = x, 1
             elif x == cand:
                 count += 1
             else:
                 count -= 1
-        return cand if A.count(cand) > N // 2 else -1
+        return cand if arr.count(cand) > len(arr) // 2 else -1
 ''',
-        "approach": "Boyer-Moore Voting Algorithm to find candidate, then verify count > N // 2.",
+        "approach": "Boyer-Moore Voting Algorithm.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "kadanes-algorithm-1587115620": {
         "code": '''class Solution:
-    def maxSubArraySum(self, arr):
+    def maxSubarraySum(self, arr):
         max_so_far = arr[0]
         curr_max = arr[0]
         for i in range(1, len(arr)):
@@ -367,35 +369,36 @@ class Solution:
             max_so_far = max(max_so_far, curr_max)
         return max_so_far
 ''',
-        "approach": "Kadane's algorithm: track maximum subarray sum ending at current index.",
+        "approach": "Kadane's Algorithm for maximum subarray sum.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "stock-buy-and-sell-1587115621": {
         "code": '''class Solution:
-    def stockBuySell(self, A, N):
+    def stockBuySell(self, arr):
         res = []
+        n = len(arr)
         i = 0
-        while i < N - 1:
-            while i < N - 1 and A[i + 1] <= A[i]:
+        while i < n - 1:
+            while i < n - 1 and arr[i + 1] <= arr[i]:
                 i += 1
-            if i == N - 1:
+            if i == n - 1:
                 break
             buy = i
             i += 1
-            while i < N and A[i] >= A[i - 1]:
+            while i < n and arr[i] >= arr[i - 1]:
                 i += 1
             sell = i - 1
             res.append([buy, sell])
         return res
 ''',
-        "approach": "Find local minima (buy) followed by local maxima (sell) to maximize profit.",
+        "approach": "Track local minima and local maxima for stock buy & sell.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "array-of-alternate-ve-and-ve-nos1401": {
         "code": '''class Solution:
-    def rearrange(self, arr, n):
+    def rearrange(self, arr):
         pos = [x for x in arr if x >= 0]
         neg = [x for x in arr if x < 0]
         i = j = k = 0
@@ -407,52 +410,53 @@ class Solution:
         while j < len(neg):
             arr[k] = neg[j]; k += 1; j += 1
 ''',
-        "approach": "Separate positive and negative numbers, then merge alternately.",
+        "approach": "Alternate merge of positive and negative subarrays.",
         "time": "O(N)",
         "space": "O(N)"
     },
     "next-permutation5226": {
         "code": '''class Solution:
-    def nextPermutation(self, N, arr):
+    def nextPermutation(self, arr):
+        n = len(arr)
         idx = -1
-        for i in range(N - 2, -1, -1):
+        for i in range(n - 2, -1, -1):
             if arr[i] < arr[i + 1]:
                 idx = i
                 break
         if idx == -1:
             arr.reverse()
-            return arr
-        for i in range(N - 1, idx, -1):
+            return
+        for i in range(n - 1, idx, -1):
             if arr[i] > arr[idx]:
                 arr[i], arr[idx] = arr[idx], arr[i]
                 break
         arr[idx + 1:] = reversed(arr[idx + 1:])
-        return arr
 ''',
-        "approach": "Find pivot from right where arr[i] < arr[i+1], swap with next greater, reverse suffix.",
+        "approach": "In-place next lexicographical permutation generation.",
         "time": "O(N)",
         "space": "O(1)"
     },
     "leaders-in-an-array-1587115620": {
         "code": '''class Solution:
-    def leaders(self, A, N):
+    def leaders(self, arr):
         res = []
-        max_right = A[-1]
+        n = len(arr)
+        max_right = arr[-1]
         res.append(max_right)
-        for i in range(N - 2, -1, -1):
-            if A[i] >= max_right:
-                max_right = A[i]
+        for i in range(n - 2, -1, -1):
+            if arr[i] >= max_right:
+                max_right = arr[i]
                 res.append(max_right)
         res.reverse()
         return res
 ''',
-        "approach": "Traverse array from right to left, tracking maximum element seen so far.",
+        "approach": "Traverse from right to left tracking maximum element.",
         "time": "O(N)",
         "space": "O(N)"
     },
     "longest-consecutive-subsequence2449": {
         "code": '''class Solution:
-    def findLongestConsecSubseq(self, arr, N):
+    def longestConsecutive(self, arr):
         s = set(arr)
         max_len = 0
         for x in s:
@@ -465,7 +469,7 @@ class Solution:
                 max_len = max(max_len, streak)
         return max_len
 ''',
-        "approach": "Store elements in set. For each sequence starting number (x-1 not in set), count consecutive streak.",
+        "approach": "Set iteration starting from sequence heads.",
         "time": "O(N)",
         "space": "O(N)"
     },
@@ -485,35 +489,35 @@ class Solution:
                     res.append(c)
         return "".join(res)
 ''',
-        "approach": "Track depth count of open parentheses to omit outermost layer.",
-        "time": "O(|S|)",
-        "space": "O(|S|)"
+        "approach": "Depth counter to strip outer parenthesis layer.",
+        "time": "O(|s|)",
+        "space": "O(|s|)"
     },
     "reverse-words-in-a-given-string": {
         "code": '''class Solution:
-    def reverseWords(self, S):
-        words = S.split(".")
+    def reverseWords(self, s):
+        words = s.split(".")
         return ".".join(words[::-1])
 ''',
-        "approach": "Split string S by dot delimiter, reverse word list, and join with dot.",
-        "time": "O(|S|)",
-        "space": "O(|S|)"
+        "approach": "Split string by '.' delimiter and reverse word array.",
+        "time": "O(|s|)",
+        "space": "O(|s|)"
     },
     "largest-odd-number-in-string": {
         "code": '''class Solution:
-    def maxOdd(self, s):
+    def maxOdd(self, s: str) -> str:
         for i in range(len(s) - 1, -1, -1):
             if int(s[i]) % 2 != 0:
                 return s[:i + 1]
         return ""
 ''',
-        "approach": "Scan from right to find first odd digit; return prefix up to that digit.",
-        "time": "O(|S|)",
+        "approach": "Right-to-left scan for first odd digit.",
+        "time": "O(|s|)",
         "space": "O(1)"
     },
     "longest-common-prefix-in-an-array5129": {
         "code": '''class Solution:
-    def longestCommonPrefix(self, arr, n):
+    def longestCommonPrefix(self, arr):
         if not arr:
             return "-1"
         pref = arr[0]
@@ -524,24 +528,24 @@ class Solution:
                     return "-1"
         return pref
 ''',
-        "approach": "Horizontal scanning: trim prefix until all array strings start with it.",
+        "approach": "Trim prefix until all array elements start with it.",
         "time": "O(N * M)",
         "space": "O(1)"
     },
     "isomorphic-strings-1587115620": {
         "code": '''class Solution:
-    def areIsomorphic(self, str1, str2):
-        if len(str1) != len(str2):
+    def areIsomorphic(self, s1, s2):
+        if len(s1) != len(s2):
             return False
         m1, m2 = {}, {}
-        for c1, c2 in zip(str1, str2):
+        for c1, c2 in zip(s1, s2):
             if (c1 in m1 and m1[c1] != c2) or (c2 in m2 and m2[c2] != c1):
                 return False
             m1[c1] = c2
             m2[c2] = c1
         return True
 ''',
-        "approach": "Bi-directional character mapping check using two hash maps.",
+        "approach": "Bi-directional character mapping check.",
         "time": "O(N)",
         "space": "O(1)"
     },
@@ -552,22 +556,22 @@ class Solution:
             return False
         return s2 in (s1 + s1)
 ''',
-        "approach": "If s2 is a rotation of s1, it must be a substring of s1 + s1.",
+        "approach": "Check if s2 is a substring of (s1 + s1).",
         "time": "O(N)",
         "space": "O(N)"
     },
     "anagram-1587115620": {
         "code": '''class Solution:
-    def isAnagram(self, a, b):
-        return sorted(a) == sorted(b)
+    def areAnagrams(self, s1, s2):
+        return sorted(s1) == sorted(s2)
 ''',
-        "approach": "Compare sorted character arrays of strings a and b.",
+        "approach": "Compare sorted character arrays.",
         "time": "O(N log N)",
         "space": "O(N)"
     },
     "binary-search-1587115620": {
         "code": '''class Solution:
-    def binarysearch(self, arr, k):
+    def firstSearch(self, arr, k):
         low, high = 0, len(arr) - 1
         while low <= high:
             mid = (low + high) // 2
@@ -579,50 +583,50 @@ class Solution:
                 high = mid - 1
         return -1
 ''',
-        "approach": "Standard binary search on sorted array.",
+        "approach": "Binary search for target element k.",
         "time": "O(log N)",
         "space": "O(1)"
     },
     "floor-in-a-sorted-array-1587115620": {
         "code": '''class Solution:
-    def findFloor(self, A, N, X):
-        low, high = 0, N - 1
+    def findFloor(self, arr, x):
+        low, high = 0, len(arr) - 1
         ans = -1
         while low <= high:
             mid = (low + high) // 2
-            if A[mid] <= X:
+            if arr[mid] <= x:
                 ans = mid
                 low = mid + 1
             else:
                 high = mid - 1
         return ans
 ''',
-        "approach": "Binary search for largest element <= X.",
+        "approach": "Binary search for floor index of x.",
         "time": "O(log N)",
         "space": "O(1)"
     },
     "search-insert-position-of-k-in-a-sorted-array": {
         "code": '''class Solution:
-    def searchInsertK(self, Arr, N, k):
-        low, high = 0, N - 1
-        ans = N
+    def searchInsertK(self, arr, k):
+        low, high = 0, len(arr) - 1
+        ans = len(arr)
         while low <= high:
             mid = (low + high) // 2
-            if Arr[mid] >= k:
+            if arr[mid] >= k:
                 ans = mid
                 high = mid - 1
             else:
                 low = mid + 1
         return ans
 ''',
-        "approach": "Binary search lower bound for target k.",
+        "approach": "Binary search lower bound insertion index for k.",
         "time": "O(log N)",
         "space": "O(1)"
     },
     "minimum-element-in-a-sorted-and-rotated-array": {
         "code": '''class Solution:
-    def findMin(self, arr, n):
-        low, high = 0, n - 1
+    def findMin(self, arr):
+        low, high = 0, len(arr) - 1
         ans = float('inf')
         while low <= high:
             mid = (low + high) // 2
@@ -637,14 +641,15 @@ class Solution:
                 high = mid - 1
         return ans
 ''',
-        "approach": "Binary search on sorted half to find minimum element in rotated array.",
+        "approach": "Binary search on sorted half to find minimum in rotated array.",
         "time": "O(log N)",
         "space": "O(1)"
     },
     "peak-element": {
         "code": '''class Solution:
-    def peakElement(self, arr, n):
-        low, high = 0, n - 1
+    def peakElement(self, arr):
+        low, high = 0, len(arr) - 1
+        n = len(arr)
         while low <= high:
             mid = (low + high) // 2
             left = arr[mid - 1] if mid > 0 else float('-inf')
@@ -657,7 +662,7 @@ class Solution:
                 high = mid - 1
         return 0
 ''',
-        "approach": "Binary search for peak element greater than its neighbors.",
+        "approach": "Binary search for peak element index.",
         "time": "O(log N)",
         "space": "O(1)"
     }

@@ -1,16 +1,7 @@
-2026/08/30-19:45:32.649 3534 Reusing MANIFEST D:\hackereank x git\.gfg_user_data\Default\Local Storage\leveldb/MANIFEST-000001
-2026/08/30-19:45:32.657 3534 Recovering log #10
-2026/08/30-19:45:32.657 3534 Level-0 table #12: started
-2026/08/30-19:45:32.666 3534 Level-0 table #12: 12298 bytes OK
-2026/08/30-19:45:32.667 3534 Recovering log #12
-2026/08/30-19:45:32.668 3534 Reusing old log D:\hackereank x git\.gfg_user_data\Default\Local Storage\leveldb/000012.log 
-2026/08/30-19:45:32.671 3534 Delete type=0 #10
-2026/08/30-19:45:32.671 3534 Delete type=2 #13
-2026/08/30-19:45:32.673 3f54 Compacting 4@0 + 0@1 files
-2026/08/30-19:45:32.681 3f54 Generated table #13@0: 26 keys, 10299 bytes
-2026/08/30-19:45:32.681 3f54 Compacted 4@0 + 0@1 files => 10299 bytes
-2026/08/30-19:45:32.683 3f54 compacted to: files[ 0 1 0 0 0 0 0 ]
-2026/08/30-19:45:32.684 3f54 Delete type=2 #3
-2026/08/30-19:45:32.684 3f54 Delete type=2 #6
-2026/08/30-19:45:32.684 3f54 Delete type=2 #9
-2026/08/30-19:45:32.684 3f54 Delete type=2 #12
+2026/08/30-20:06:18.420 1424 Reusing MANIFEST D:\hackereank x git\.gfg_user_data\Default\Local Storage\leveldb/MANIFEST-000001
+2026/08/30-20:06:18.430 1424 Recovering log #18
+2026/08/30-20:06:18.431 1424 Level-0 table #21: started
+2026/08/30-20:06:18.439 1424 Level-0 table #21: 12459 bytes OK
+2026/08/30-20:06:18.439 1424 Recovering log #20
+2026/08/30-20:06:18.442 1424 Reusing old log D:\hackereank x git\.gfg_user_data\Default\Local Storage\leveldb/000020.log 
+2026/08/30-20:06:18.444 1424 Delete type=0 #18
